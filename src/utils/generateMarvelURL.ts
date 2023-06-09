@@ -3,7 +3,7 @@ import env from './envValidation';
 import md5 from 'md5'
 
 
-const generateMarvelURL = (offset?: number, limit? : number) : string => {
+const generateMarvelURL = (offset?: number | string, limit? : number | string) : string => {
     const publicKey = env.MARVEL_PUBLIC_KEY
     const privateKey = env.MARVEL_PRIVATE_KEY
 

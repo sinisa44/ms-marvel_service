@@ -1,7 +1,6 @@
 import { RequestHandler, Request, Response, NextFunction } from "express";
 import generateMarvelURL from "../utils/generateMarvelURL";
 
-import ICharacter from "../interfaces/character.interface";
 import CharacterModel from "../models/character";
 
 export const getCharacters = async (
@@ -14,8 +13,8 @@ export const getCharacters = async (
   try {
     const data = await fetch(
       `https://gateway.marvel.com/v1/public/characters${generateMarvelURL(
-        1,
-        1
+        offset as string,
+        limit as string
       )}`
     );
 
@@ -51,17 +50,19 @@ export const getFavoriteCharacters = async (req: Request, res: Response) => {
   }
 };
 
-
-export const getFavoriteCharactersById = async(req:Request, res:Response) => {
-  const {_id} = req.params;
+export const getFavoriteCharactersById = async (
+  req: Request,
+  res: Response
+) => {
+  const { _id } = req.params;
 
   try {
     const character = CharacterModel.findById(_id);
 
-    res.status(200).json(character)
-  }catch (error: unknown) {
+    res.status(200).json(character);
+  } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({ error: error.toString() });
     }
   }
-}
+};

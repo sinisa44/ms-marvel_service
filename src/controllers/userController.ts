@@ -33,13 +33,12 @@ export const login= async (
   res:Response,
   next: NextFunction
 ) => {
-  const { email, password } = req.body;
-
+  const { email, password } = req.body;  
   try {
     const user  = await UserModel.findOne({ email: email });
 
     if (!user) {
-      res.status(404).json({ message: "invalid credentials " });
+      res.status(404).json({ message: "invalid credentials 1" });
     }
 
     const compare = await comparePassword(password!, user?.password!);
