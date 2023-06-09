@@ -1,4 +1,4 @@
-import { RequestHandler,Request, Response } from "express";
+import { RequestHandler,Request, Response, NextFunction } from "express";
 
 import UserModel from "../models/user";
 // import mongoose from "mongoose";
@@ -14,12 +14,7 @@ interface IUser {
   _id?: string;
 }
 
-export const register: RequestHandler<
-  unknown,
-  unknown,
-  IUser,
-  unknown
-> = async (req, res, next) => {
+export const register = async (req:Request, res:Response, next: NextFunction) => {
   const { username, password, email } = req.body;
 
   try {
@@ -33,10 +28,10 @@ export const register: RequestHandler<
   }
 };
 
-export const login: RequestHandler<unknown, unknown, IUser, unknown> = async (
-  req,
-  res,
-  next
+export const login= async (
+  req:Request,
+  res:Response,
+  next: NextFunction
 ) => {
   const { email, password } = req.body;
 
@@ -44,7 +39,7 @@ export const login: RequestHandler<unknown, unknown, IUser, unknown> = async (
     const user  = await UserModel.findOne({ email: email });
 
     if (!user) {
-      res.status(404).json({ message: "invalid credentials 1" });
+      res.status(404).json({ message: "invalid credentials " });
     }
 
     const compare = await comparePassword(password!, user?.password!);
@@ -64,10 +59,8 @@ export const login: RequestHandler<unknown, unknown, IUser, unknown> = async (
       );
       res.status(201).json({ token });
     } else {
-      res.status(401).json({ message: "invalid credentials 2" });
+      res.status(401).json({ message: "invalid credentials " });
     }
-
-    console.log({ compare });
   } catch (error) {
     console.error(error);
   }
