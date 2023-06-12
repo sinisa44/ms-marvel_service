@@ -23,7 +23,6 @@ export const getCharacters = async (
     console.error(error);
   }
 
-  return { offset, limit };
 };
 
 export const saveFavoriteCharacter = async (req: Request, res: Response) => {
