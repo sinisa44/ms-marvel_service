@@ -14,7 +14,7 @@ app.use(morgan('dev'))
 
 app.use(express.json());
 
-app.use('/api/characters', authMiddleware, characterRoutes)
+app.use('/api/characters', characterRoutes)
 app.use('/api/comics', comicRoutes);
 app.use('/api/users', userRoutes);
 

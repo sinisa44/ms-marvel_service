@@ -11,6 +11,9 @@ const generateMarvelURL = (offset?: number | string, limit? : number | string) :
 
     const hash = md5(timestamp + privateKey + publicKey);
 
+    // console.log({offset, limit});
+    
+
     return `?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&offset=${offset}&limit=${limit}`;
 }
 

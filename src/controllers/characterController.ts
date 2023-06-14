@@ -8,8 +8,12 @@ export const getCharacters = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { offset, limit } = req.params;
+  const { offset, limit } = req.query;
 
+  // console.log({offset,limit});
+  // console.log(req);
+  
+  
   try {
     const data = await fetch(
       `https://gateway.marvel.com/v1/public/characters${generateMarvelURL(
